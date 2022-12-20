@@ -1,10 +1,19 @@
 @extends('layout.app')
 @section('content')
 <section class="container">
-    <ul>
+    <div class="row">
         @foreach ($products as $product)
-            <li><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></li>
+            <div class="col-3 my-card">
+                <div>
+                    <img src="{{$product->src}}" alt="">
+                </div>
+                <div><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></div>
+                <div>{{$product->type}}</div>
+                <div>{{$product->cooking_time}}</div>
+                <div>{{$product->weight}}</div>
+                <div class="description">{{$product->description}}</div>
+            </div>
         @endforeach
-    </ul>
+    </div>
 </section>
 @endsection
