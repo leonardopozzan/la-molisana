@@ -1,6 +1,15 @@
 @extends('layout.app')
 @section('content')
 <section class="container">
-   <h1>{{$product->title}}</h1>
+   <div class="col-3 my-card">
+      <div>
+          <img src="{{$product->src}}" alt="">
+      </div>
+      <div><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></div>
+      <div>{{$product->type}}</div>
+      <div>{{$product->cooking_time}}</div>
+      <div>{{$product->weight}}</div>
+      <div class="description">{{$product->description}}</div>
+  </div>
 </section>
 @endsection

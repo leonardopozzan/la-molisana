@@ -43,7 +43,9 @@ class ProductController extends Controller
             $newProduct->title = $formData['title'];
             $newProduct->description = $formData['description'];
             $newProduct->type = $formData['type'];
-            $newProduct->image = $formData['image'];
+            $newProduct->src = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+            $newProduct->src_h = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+            $newProduct->src_p = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
             $newProduct->cooking_time = $formData['cooking_time'];
             $newProduct->weight = $formData['weight'];
             $newProduct->save();

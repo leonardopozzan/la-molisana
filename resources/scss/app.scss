@@ -31,3 +31,22 @@ footer{
         }
     }
 }
+.my-form{
+    background-color: black;
+    color: white;
+    margin: 50px 0;
+    border-radius: 3rem;
+    padding: 3rem 10rem;
+    *{
+        font-size: 1.2rem;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .my-btn{
+        background-color: $blue;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        color: $white;
+        border: 0;
+    }
+}

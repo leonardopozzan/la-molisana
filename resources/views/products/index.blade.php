@@ -1,6 +1,7 @@
 @extends('layout.app')
 @section('content')
 <section class="container">
+    <a href="{{route('products.create')}}">Aggiungi la tua pasta</a>
     <div class="row">
         @foreach ($products as $product)
             <div class="col-3 my-card">
