@@ -37,18 +37,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
         $formData = $request->all();
+        //METODO 1
+        // $newProduct = new Product();
+        // $newProduct->title = $formData['title'];
+        // $newProduct->description = $formData['description'];
+        // $newProduct->type = $formData['type'];
+        // $newProduct->src = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        // $newProduct->src_h = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        // $newProduct->src_p = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        // $newProduct->cooking_time = $formData['cooking_time'];
+        // $newProduct->weight = $formData['weight'];
+
+        //METODO 2
         $newProduct = new Product();
-            $newProduct->title = $formData['title'];
-            $newProduct->description = $formData['description'];
-            $newProduct->type = $formData['type'];
-            $newProduct->src = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
-            $newProduct->src_h = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
-            $newProduct->src_p = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
-            $newProduct->cooking_time = $formData['cooking_time'];
-            $newProduct->weight = $formData['weight'];
-            $newProduct->save();
+        $newProduct->fill($formData);
+        $newProduct->src = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $newProduct->src_h = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $newProduct->src_p = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $newProduct->save();
+
+        //METODO 3
+        // $newProduct = Product::create($formData);
+
         return redirect()->route('products.show', ['product'=> $newProduct->id]);
     }
 
@@ -70,9 +83,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -80,11 +93,21 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $formData = $request->all();
+        $product = Product::findOrFail($id);
+        $product->title = $formData['title'];
+        $product->description = $formData['description'];
+        $product->type = $formData['type'];
+        $product->src = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $product->src_h = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $product->src_p = 'https://www.lamolisana.it/wp-content/uploads/2021/09/4-spaghetto-quadrato-bucato.jpg';
+        $product->cooking_time = $formData['cooking_time'];
+        $product->weight = $formData['weight'];
+        $product->update();
+        return redirect()->route('products.show', $product->id);
     }
 
     /**
@@ -93,8 +116,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
